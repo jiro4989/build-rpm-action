@@ -62,6 +62,16 @@ proc fixFile(file, package, maintainer, version, arch, desc, install, files, lic
                                install=install, files=files, license=license)
   writeFile(file, fixedBody)
 
+proc getInstallFiles(packageRoot: string): (seq[string], seq[string]) =
+  var
+    installScript: seq[string]
+    files: seq[string]
+  for relPath in walkDirRec(packageRoot):
+    let path = relPath[packageRoot.len..^1]
+    installScript.add(path.generateInstallScript)
+    files.add(path)
+  return (installScript, files)
+
 when isMainModule and not defined modeTest:
   let
     args = commandLineParams()
@@ -75,14 +85,7 @@ when isMainModule and not defined modeTest:
     desc = params.desc.formatDescription
     license = params.license
 
-  var
-    installScript: seq[string]
-    files: seq[string]
-  for relPath in walkDirRec(packageRoot):
-    let path = relPath[packageRoot.len..^1]
-    installScript.add(path.generateInstallScript)
-    files.add(path)
-
+  let (installScript, files) = getInstallFiles(packageRoot)
   fixFile(params.specfile,
           package=package,
           maintainer=maintainer,
