@@ -30,7 +30,7 @@ jobs:
           package_root: .rpmpkg
           maintainer: jiro4989
           version: 'v1.0.0'
-          arch: 'amd64'
+          arch: 'x86_64'
           desc: 'test package'
       - run: |
           docker run --rm -v $PWD:/work -t centos:7 bash -c 'rpm -Uvh /work/*.rpm && testbin'
@@ -57,7 +57,7 @@ jobs:
           package_root: .rpmpkg
           maintainer: jiro4989
           version: 'v1.0.0'
-          arch: 'amd64'
+          arch: 'x86_64'
           desc: 'test package'
       - run: |
           docker run --rm -v $PWD:/work -t centos:7 bash -c 'rpm -Uvh /work/*.rpm && nimjson -h'
