@@ -55,15 +55,15 @@ jobs:
 
       - name: create sample script
         run: |
-          mkdir -p .debpkg/usr/bin
-          mkdir -p .debpkg/usr/lib/samplescript
-          echo -e "echo sample" > .debpkg/usr/bin/samplescript
-          chmod +x .debpkg/usr/bin/samplescript
-          echo -e "a=1" > .debpkg/usr/lib/samplescript/samplescript.conf
-      - uses: jiro4989/build-deb-action@v2
+          mkdir -p .rpmpkg/usr/bin
+          mkdir -p .rpmpkg/usr/lib/samplescript
+          echo -e "echo sample" > .rpmpkg/usr/bin/samplescript
+          chmod +x .rpmpkg/usr/bin/samplescript
+          echo -e "a=1" > .rpmpkg/usr/lib/samplescript/samplescript.conf
+      - uses: jiro4989/build-rpm-action@v1
         with:
           package: samplescript
-          package_root: .debpkg
+          package_root: .rpmpkg
           maintainer: your_name
           version: ${{ steps.vars.outputs.tag }} # vX.X.X
           arch: 'amd64'
