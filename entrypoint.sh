@@ -25,4 +25,4 @@ rpmbuild -bb "$RPMBUILD_SPEC_DIR/template.spec"
 
 cp -p "$RPMBUILD_DIR/RPMS/$(uname -m)"/*.rpm .
 
-ls -lah *.rpm
+ls -lah ./*.rpm
