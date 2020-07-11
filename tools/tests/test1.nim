@@ -55,7 +55,7 @@ suite "getInstallFiles":
   test "normal":
     let (inst, files) = getInstallFiles("tests/testpkg")
     check inst == @["mkdir -p %{buildroot}/usr/bin", "cp -p usr/bin/script.sh %{buildroot}/usr/bin/"]
-    check files == @["%{buildroot}/usr/bin/script.sh"]
+    check files == @["/usr/bin/script.sh"]
 
 suite "replaceTemplate":
   test "normal":

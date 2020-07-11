@@ -69,7 +69,7 @@ proc getInstallFiles(packageRoot: string): (seq[string], seq[string]) =
   for relPath in walkDirRec(packageRoot):
     let path = relPath[packageRoot.len..^1]
     installScript.add(path.generateInstallScript)
-    files.add("%{buildroot}" & path)
+    files.add(path)
   return (installScript, files)
 
 when isMainModule and not defined modeTest:
