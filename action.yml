@@ -22,7 +22,7 @@ inputs:
     required: true
   arch:
     description: 'Package architecture.'
-    default: 'amd64'
+    default: 'x86_64'
   desc:
     description: 'Package description.'
     default: ''
