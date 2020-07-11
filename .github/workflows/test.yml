@@ -32,7 +32,7 @@ jobs:
           arch: 'amd64'
           desc: 'test package'
       - run: |
-          docker run --rm -v $PWD:/work -t centos:7 bash -c 'rpm -Uvh /work/*.rpm && which testbin && testbin'
+          docker run --rm -v $PWD:/work -t centos:7 bash -c 'rpm -Uvh /work/*.rpm && testbin'
 
   test-nim-package:
     runs-on: ubuntu-latest
@@ -58,4 +58,4 @@ jobs:
           arch: 'amd64'
           desc: 'test package'
       - run: |
-          docker run --rm -v $PWD:/work -t centos:7 bash -c 'rpm -Uvh /work/*.rpm && which nimjson && nimjson -h'
+          docker run --rm -v $PWD:/work -t centos:7 bash -c 'rpm -Uvh /work/*.rpm && nimjson -h'
