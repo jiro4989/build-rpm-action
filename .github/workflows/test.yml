@@ -17,16 +17,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          mkdir -p .debpkg/usr/bin
-          mkdir -p .debpkg/usr/lib/testbin
-          echo -e "echo hello" > .debpkg/usr/bin/testbin
-          echo -e "echo hello2" > .debpkg/usr/bin/testbin2
-          echo -e "a=1" > .debpkg/usr/lib/testbin/testbin.conf
-          chmod +x .debpkg/usr/bin/*
+          mkdir -p .rpmpkg/usr/bin
+          mkdir -p .rpmpkg/usr/lib/testbin
+          echo -e "echo hello" > .rpmpkg/usr/bin/testbin
+          echo -e "echo hello2" > .rpmpkg/usr/bin/testbin2
+          echo -e "a=1" > .rpmpkg/usr/lib/testbin/testbin.conf
+          chmod +x .rpmpkg/usr/bin/*
       - uses: ./
         with:
           package: testbin
-          package_root: .debpkg
+          package_root: .rpmpkg
           maintainer: jiro4989
           version: 'v1.0.0'
           arch: 'amd64'
@@ -47,12 +47,12 @@ jobs:
           rm -rf app
           popd
 
-          mkdir -p .debpkg/usr/bin
-          mv nimjson .debpkg/usr/bin/
+          mkdir -p .rpmpkg/usr/bin
+          mv nimjson .rpmpkg/usr/bin/
       - uses: ./
         with:
           package: nimjson
-          package_root: .debpkg
+          package_root: .rpmpkg
           maintainer: jiro4989
           version: 'v1.0.0'
           arch: 'amd64'

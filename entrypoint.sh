@@ -12,17 +12,23 @@ set -eux
   --description:"$INPUT_DESC" \
   --license:"$INPUT_LICENSE"
 
-tar czf tmp.tar.gz "$INPUT_PACKAGE_ROOT/"
+(
+  mkdir /tmp/work
+  cp template.spec /tmp/work
+  cp -rp "/tmp/work/$INPUT_PACKAGE"
+  cd /tmp/work
+  tar czf tmp.tar.gz "$INPUT_PACKAGE/"
 
-readonly RPMBUILD_DIR="$HOME/rpmbuild"
-readonly RPMBUILD_SOURCE_DIR="$RPMBUILD_DIR/SOURCES"
-readonly RPMBUILD_SPEC_DIR="$RPMBUILD_DIR/SPECS"
-mkdir -p "$RPMBUILD_SOURCE_DIR"
-mkdir -p "$RPMBUILD_SPEC_DIR"
-mv tmp.tar.gz "$RPMBUILD_SOURCE_DIR"
+  readonly RPMBUILD_DIR="$HOME/rpmbuild"
+  readonly RPMBUILD_SOURCE_DIR="$RPMBUILD_DIR/SOURCES"
+  readonly RPMBUILD_SPEC_DIR="$RPMBUILD_DIR/SPECS"
+  mkdir -p "$RPMBUILD_SOURCE_DIR"
+  mkdir -p "$RPMBUILD_SPEC_DIR"
+  mv tmp.tar.gz "$RPMBUILD_SOURCE_DIR"
 
-cp -p template.spec "$RPMBUILD_SPEC_DIR"
-rpmbuild -bb "$RPMBUILD_SPEC_DIR/template.spec"
+  cp -p template.spec "$RPMBUILD_SPEC_DIR"
+  rpmbuild -bb "$RPMBUILD_SPEC_DIR/template.spec"
+)
 
 cp -p "$RPMBUILD_DIR/RPMS/$(uname -m)"/*.rpm .
 
