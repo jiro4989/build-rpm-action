@@ -13,10 +13,11 @@ set -eux
   --license:"$INPUT_LICENSE"
 
 (
-  mkdir /tmp/work
-  cp template.spec /tmp/work
-  cp -rp "/tmp/work/$INPUT_PACKAGE"
-  cd /tmp/work
+  readonly WORKDIR="/tmp/work"
+  mkdir "$WORKDIR"
+  cp template.spec "$WORKDIR"
+  cp -rp "$INPUT_PACKAGE_ROOT" "$WORKDIR/$INPUT_PACKAGE"
+  cd "$WORKDIR"
   tar czf tmp.tar.gz "$INPUT_PACKAGE/"
 
   readonly RPMBUILD_DIR="$HOME/rpmbuild"
