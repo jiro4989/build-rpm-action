@@ -9,6 +9,7 @@ set -eux
   --version:"$INPUT_VERSION" \
   --arch:"$INPUT_ARCH" \
   --maintainer:"$INPUT_MAINTAINER" \
+  --vendor:"$INPUT_VENDOR" \
   --description:"$INPUT_DESC" \
   --license:"$INPUT_LICENSE"
 

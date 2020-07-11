@@ -9,8 +9,8 @@ Version: {{VERSION}}
 Release: 1%{?dist}
 Group: Applications
 License: {{LICENSE}}
-Packager: {{PACKAGER}}
-Vendor: {{MAINTAINER}}
+Packager: {{MAINTAINER}}
+Vendor: {{VENDOR}}
 
 Source: tmp.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
@@ -69,6 +69,7 @@ suite "replaceTemplate":
       install = "mkdir -p /usr/bin\ncp -p test1 /usr/bin/\nmkdir -p /usr/bin\ncp -p test2 /usr/bin/",
       files = "/usr/bin/test1\n/usr/bin/test2",
       license = "MIT",
+      vendor = "author.org",
       )
     const want = """Summary: {{SUMMARY}}
 Name: test
@@ -76,8 +77,8 @@ Version: 1.0.0
 Release: 1%{?dist}
 Group: Applications
 License: MIT
-Packager: {{PACKAGER}}
-Vendor: author
+Packager: author
+Vendor: author.org
 
 Source: tmp.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot

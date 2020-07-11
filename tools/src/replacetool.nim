@@ -3,7 +3,7 @@ from strformat import `&`
 
 type
   Options = object
-    specFile, package, packageRoot, maintainer, version, arch, desc, license: string
+    specFile, package, packageRoot, maintainer, version, arch, desc, license, vendor: string
 
 proc getCmdOpts(params: seq[string]): Options =
   var optParser = initOptParser(params)
@@ -21,6 +21,8 @@ proc getCmdOpts(params: seq[string]): Options =
         result.packageRoot = val
       of "maintainer":
         result.maintainer = val
+      of "vendor":
+        result.vendor = val
       of "version":
         result.version = val
       of "arch":
@@ -39,11 +41,12 @@ proc generateInstallScript(path: string): seq[string] =
   result.add("mkdir -p %{buildroot}" & head)
   result.add("cp -p " & path[1..^1] & " %{buildroot}" & head & "/")
 
-proc replaceTemplate(body, package, maintainer, version, arch, desc, install, files, license: string): string =
+proc replaceTemplate(body, package, maintainer, version, arch, desc, install, files, license, vendor: string): string =
   result =
     body
       .replace("{{PACKAGE}}", package)
       .replace("{{MAINTAINER}}", maintainer)
+      .replace("{{VENDOR}}", vendor)
       .replace("{{VERSION}}", version)
       .replace("ARCH", arch)
       .replace("{{DESC}}", desc)
@@ -54,12 +57,13 @@ proc replaceTemplate(body, package, maintainer, version, arch, desc, install, fi
 proc formatDescription(desc: string): string =
   "Description: " & desc
 
-proc fixFile(file, package, maintainer, version, arch, desc, install, files, license: string) =
+proc fixFile(file, package, maintainer, version, arch, desc, install, files, license, vendor: string) =
   let
     body = readFile(file)
     fixedBody = replaceTemplate(body, package=package, maintainer=maintainer,
                                 version=version, arch=arch, desc=desc,
-                               install=install, files=files, license=license)
+                               install=install, files=files, license=license,
+                               vendor=vendor)
   writeFile(file, fixedBody)
 
 proc getInstallFiles(packageRoot: string): (seq[string], seq[string]) =
@@ -80,6 +84,9 @@ when isMainModule and not defined modeTest:
     package = params.package
     packageRoot = params.packageRoot.normalizedPath
     maintainer = params.maintainer
+    vendor =
+      if params.vendor == "": maintainer
+      else: params.vendor
     version = params.version.strip(trailing = false, chars = {'v'})
     arch = params.arch
     desc = params.desc.formatDescription
@@ -95,4 +102,5 @@ when isMainModule and not defined modeTest:
           install=installScript.join("\n"),
           files=files.join("\n"),
           license=license,
+          vendor=vendor,
          )

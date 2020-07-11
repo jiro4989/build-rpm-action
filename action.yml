@@ -11,6 +11,9 @@ inputs:
   maintainer:
     description: 'Package maintainer name.'
     required: true
+  vendor:
+    description: 'Package vendor.'
+    default: ''
   version:
     description: 'Package version.'
     required: true

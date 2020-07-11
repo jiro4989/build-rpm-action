@@ -4,8 +4,8 @@ Version: {{VERSION}}
 Release: 1%{?dist}
 Group: Applications
 License: {{LICENSE}}
-Packager: {{PACKAGER}}
-Vendor: {{MAINTAINER}}
+Packager: {{MAINTAINER}}
+Vendor: {{VENDOR}}
 
 Source: tmp.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
