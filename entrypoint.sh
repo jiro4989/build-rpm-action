@@ -3,21 +3,25 @@
 set -eux
 
 /replacetool \
-  --debian-dir:/template/DEBIAN \
+  --specfile:template.spec \
   --package:"$INPUT_PACKAGE" \
   --version:"$INPUT_VERSION" \
   --arch:"$INPUT_ARCH" \
   --maintainer:"$INPUT_MAINTAINER" \
   --description:"$INPUT_DESC"
 
-cp -r /template/DEBIAN "$INPUT_PACKAGE_ROOT/"
+tar czf tmp.tar.gz "$INPUT_PACKAGE_ROOT/"
 
-# remove prefix 'v'
-FIXED_VERSION="$(echo "$INPUT_VERSION" | sed -E 's/^v//')"
-readonly FIXED_VERSION
+readonly RPMBUILD_DIR="$HOME/rpmbuild"
+readonly RPMBUILD_SOURCE_DIR="$RPMBUILD_DIR/SOURCES"
+readonly RPMBUILD_SPEC_DIR="$RPMBUILD_DIR/SPECS"
+mkdir -p "$RPMBUILD_SOURCE_DIR"
+mkdir -p "$RPMBUILD_SPEC_DIR"
+mv tmp.tar.gz "$RPMBUILD_SOURCE_DIR"
 
-# create deb file
-readonly DEB_FILE="${INPUT_PACKAGE}_${FIXED_VERSION}_${INPUT_ARCH}.deb"
-dpkg-deb -b "$INPUT_PACKAGE_ROOT" "$DEB_FILE"
+cp -p template.spec "$RPMBUILD_SPEC_DIR"
+rpmbuild -bb "$RPMBUILD_SPEC_DIR/template.spec"
 
-ls ./*.deb
+cp -p "$RPMBUILD_DIR/RPMS/$(uname -m)"/*.rpm .
+
+ls -lah *.rpm
