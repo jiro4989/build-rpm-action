@@ -4,6 +4,7 @@ set -eux
 
 /replacetool \
   --specfile:template.spec \
+  --package-root:"$INPUT_PACKAGE_ROOT" \
   --package:"$INPUT_PACKAGE" \
   --version:"$INPUT_VERSION" \
   --arch:"$INPUT_ARCH" \
