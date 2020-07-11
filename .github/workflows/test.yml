@@ -25,6 +25,7 @@ jobs:
           chmod +x .rpmpkg/usr/bin/*
       - uses: ./
         with:
+          summary: 'testbin is a test script'
           package: testbin
           package_root: .rpmpkg
           maintainer: jiro4989
@@ -51,6 +52,7 @@ jobs:
           mv nimjson .rpmpkg/usr/bin/
       - uses: ./
         with:
+          summary: 'nimjson is a test command.'
           package: nimjson
           package_root: .rpmpkg
           maintainer: jiro4989

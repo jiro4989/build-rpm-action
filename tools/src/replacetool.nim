@@ -1,9 +1,8 @@
 import os, strutils, parseopt
-from strformat import `&`
 
 type
   Options = object
-    specFile, package, packageRoot, maintainer, version, arch, desc, license, vendor: string
+    specFile, summary, package, packageRoot, maintainer, version, arch, desc, license, vendor: string
 
 proc getCmdOpts(params: seq[string]): Options =
   var optParser = initOptParser(params)
@@ -15,6 +14,8 @@ proc getCmdOpts(params: seq[string]): Options =
       case key
       of "specfile":
         result.specFile = val
+      of "summary":
+        result.summary = val
       of "package":
         result.package = val
       of "package-root":
@@ -41,9 +42,10 @@ proc generateInstallScript(path: string): seq[string] =
   result.add("mkdir -p %{buildroot}" & head)
   result.add("cp -p " & path[1..^1] & " %{buildroot}" & head & "/")
 
-proc replaceTemplate(body, package, maintainer, version, arch, desc, install, files, license, vendor: string): string =
+proc replaceTemplate(body, summary, package, maintainer, version, arch, desc, install, files, license, vendor: string): string =
   result =
     body
+      .replace("{{SUMMARY}}", summary)
       .replace("{{PACKAGE}}", package)
       .replace("{{MAINTAINER}}", maintainer)
       .replace("{{VENDOR}}", vendor)
@@ -57,10 +59,10 @@ proc replaceTemplate(body, package, maintainer, version, arch, desc, install, fi
 proc formatDescription(desc: string): string =
   "Description: " & desc
 
-proc fixFile(file, package, maintainer, version, arch, desc, install, files, license, vendor: string) =
+proc fixFile(file, summary, package, maintainer, version, arch, desc, install, files, license, vendor: string) =
   let
     body = readFile(file)
-    fixedBody = replaceTemplate(body, package=package, maintainer=maintainer,
+    fixedBody = replaceTemplate(body, summary=summary, package=package, maintainer=maintainer,
                                 version=version, arch=arch, desc=desc,
                                install=install, files=files, license=license,
                                vendor=vendor)
@@ -81,6 +83,7 @@ when isMainModule and not defined modeTest:
     args = commandLineParams()
     params = getCmdOpts(args)
 
+    summary = params.summary
     package = params.package
     packageRoot = params.packageRoot.normalizedPath
     maintainer = params.maintainer
@@ -94,6 +97,7 @@ when isMainModule and not defined modeTest:
 
   let (installScript, files) = getInstallFiles(packageRoot)
   fixFile(params.specfile,
+          summary=summary,
           package=package,
           maintainer=maintainer,
           version=version,

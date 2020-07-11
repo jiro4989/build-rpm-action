@@ -2,6 +2,9 @@ name: 'build-deb-action'
 description: 'Build debian package.'
 author: 'jiro4989'
 inputs:
+  summary:
+    description: 'Package summary.'
+    required: true
   package:
     description: 'Package name of debian package.'
     required: true

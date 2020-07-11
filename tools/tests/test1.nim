@@ -61,6 +61,7 @@ suite "replaceTemplate":
   test "normal":
     let got = replaceTemplate(
       templateSpec,
+      summary = "package summary",
       package = "test",
       maintainer = "author",
       version = "1.0.0",
@@ -71,7 +72,7 @@ suite "replaceTemplate":
       license = "MIT",
       vendor = "author.org",
       )
-    const want = """Summary: {{SUMMARY}}
+    const want = """Summary: package summary
 Name: test
 Version: 1.0.0
 Release: 1%{?dist}
