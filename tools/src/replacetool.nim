@@ -50,7 +50,7 @@ proc replaceTemplate(body, summary, package, maintainer, version, arch, desc, in
       .replace("{{MAINTAINER}}", maintainer)
       .replace("{{VENDOR}}", vendor)
       .replace("{{VERSION}}", version)
-      .replace("ARCH", arch)
+      .replace("{{ARCH}}", arch)
       .replace("{{DESC}}", desc)
       .replace("{{INSTALL}}", install)
       .replace("{{FILES}}", files)

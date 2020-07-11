@@ -14,6 +14,7 @@ Vendor: {{VENDOR}}
 
 Source: tmp.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
+BuildArch: {{ARCH}}
 
 %description
 {{DESC}}
@@ -65,7 +66,7 @@ suite "replaceTemplate":
       package = "test",
       maintainer = "author",
       version = "1.0.0",
-      arch = "test",
+      arch = "noarch",
       desc = "description",
       install = "mkdir -p /usr/bin\ncp -p test1 /usr/bin/\nmkdir -p /usr/bin\ncp -p test2 /usr/bin/",
       files = "/usr/bin/test1\n/usr/bin/test2",
@@ -83,6 +84,7 @@ Vendor: author.org
 
 Source: tmp.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
+BuildArch: noarch
 
 %description
 description
