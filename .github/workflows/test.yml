@@ -3,6 +3,15 @@ on:
   push:
   pull_request:
 jobs:
+  test-tools:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: jiro4989/setup-nim-action@v1
+      - run: |
+          cd tools
+          nimble test -Y
+
   test-script:
     runs-on: ubuntu-latest
     steps:
