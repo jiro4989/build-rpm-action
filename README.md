@@ -1,13 +1,13 @@
-# build-deb-action
+# build-rpm-action
 
-<!-- TODO: replace jiro4989/build-deb-action with your repo name -->
-[![Test](https://github.com/jiro4989/build-deb-action/workflows/Test/badge.svg)](https://github.com/jiro4989/build-deb-action/actions?query=workflow%3ATest)
-[![reviewdog](https://github.com/jiro4989/build-deb-action/workflows/reviewdog/badge.svg)](https://github.com/jiro4989/build-deb-action/actions?query=workflow%3Areviewdog)
-[![release](https://github.com/jiro4989/build-deb-action/workflows/release/badge.svg)](https://github.com/jiro4989/build-deb-action/actions?query=workflow%3Arelease)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/jiro4989/build-deb-action?logo=github&sort=semver)](https://github.com/jiro4989/build-deb-action/releases)
+<!-- TODO: replace jiro4989/build-rpm-action with your repo name -->
+[![Test](https://github.com/jiro4989/build-rpm-action/workflows/Test/badge.svg)](https://github.com/jiro4989/build-rpm-action/actions?query=workflow%3ATest)
+[![reviewdog](https://github.com/jiro4989/build-rpm-action/workflows/reviewdog/badge.svg)](https://github.com/jiro4989/build-rpm-action/actions?query=workflow%3Areviewdog)
+[![release](https://github.com/jiro4989/build-rpm-action/workflows/release/badge.svg)](https://github.com/jiro4989/build-rpm-action/actions?query=workflow%3Arelease)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/jiro4989/build-rpm-action?logo=github&sort=semver)](https://github.com/jiro4989/build-rpm-action/releases)
 [![action-bumpr supported](https://img.shields.io/badge/bumpr-supported-ff69b4?logo=github&link=https://github.com/haya14busa/action-bumpr)](https://github.com/haya14busa/action-bumpr)
 
-`build-deb-action` builds a simple debian package.
+`build-rpm-action` builds a simple debian package.
 
 ## Input
 
