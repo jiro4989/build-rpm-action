@@ -7,7 +7,7 @@ License: {{LICENSE}}
 Packager: {{PACKAGER}}
 Vendor: {{MAINTAINER}}
 
-Source: {{SOURCE}}
+Source: tmp.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 
 %description
