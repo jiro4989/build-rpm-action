@@ -1,0 +1,31 @@
+name: 'build-deb-action'
+description: 'Build debian package.'
+author: 'jiro4989'
+inputs:
+  package:
+    description: 'Package name of debian package.'
+    required: true
+  package_root:
+    description: 'Directory of release files.'
+    required: true
+  maintainer:
+    description: 'Package maintainer name.'
+    required: true
+  version:
+    description: 'Package version.'
+    required: true
+  arch:
+    description: 'Package architecture.'
+    default: 'amd64'
+  desc:
+    description: 'Package description.'
+    default: ''
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
+# Ref: https://haya14busa.github.io/github-action-brandings/
+# TODO: update branding if you want.
+branding:
+  icon: 'check'
+  color: 'blue'
