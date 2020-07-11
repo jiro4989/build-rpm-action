@@ -21,7 +21,6 @@ rm -rf $RPM_BUILD_ROOT
 %build
 
 %install
-find .
 {{INSTALL}}
 
 %clean
