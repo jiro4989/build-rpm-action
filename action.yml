@@ -20,6 +20,9 @@ inputs:
   desc:
     description: 'Package description.'
     default: ''
+  license:
+    description: 'Package LICENSE.'
+    default: 'MIT'
 runs:
   using: 'docker'
   image: 'Dockerfile'

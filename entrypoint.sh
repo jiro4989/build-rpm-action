@@ -9,7 +9,8 @@ set -eux
   --version:"$INPUT_VERSION" \
   --arch:"$INPUT_ARCH" \
   --maintainer:"$INPUT_MAINTAINER" \
-  --description:"$INPUT_DESC"
+  --description:"$INPUT_DESC" \
+  --license:"$INPUT_LICENSE"
 
 tar czf tmp.tar.gz "$INPUT_PACKAGE_ROOT/"
 
