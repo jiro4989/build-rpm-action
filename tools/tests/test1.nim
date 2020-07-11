@@ -46,16 +46,16 @@ suite "generateInstallScript":
   test "normal":
     let path = "/usr/bin/script1"
     let want = @[
-      "mkdir -p /usr/bin",
-      "cp -p script1 /usr/bin/",
+      "mkdir -p %{buildroot}/usr/bin",
+      "cp -p usr/bin/script1 %{buildroot}/usr/bin/",
     ]
     check want == generateInstallScript(path)
 
 suite "getInstallFiles":
   test "normal":
     let (inst, files) = getInstallFiles("tests/testpkg")
-    check inst == @["mkdir -p /usr/bin", "cp -p script.sh /usr/bin/"]
-    check files == @["/usr/bin/script.sh"]
+    check inst == @["mkdir -p %{buildroot}/usr/bin", "cp -p usr/bin/script.sh %{buildroot}/usr/bin/"]
+    check files == @["%{buildroot}/usr/bin/script.sh"]
 
 suite "replaceTemplate":
   test "normal":

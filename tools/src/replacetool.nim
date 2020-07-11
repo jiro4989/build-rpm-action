@@ -35,9 +35,9 @@ proc getCmdOpts(params: seq[string]): Options =
       assert false
 
 proc generateInstallScript(path: string): seq[string] =
-  let (head, tail) = path.splitPath
-  result.add(&"mkdir -p {head}")
-  result.add(&"cp -p {tail} {head}/")
+  let (head, _) = path.splitPath
+  result.add("mkdir -p %{buildroot}" & head)
+  result.add("cp -p " & path[1..^1] & " %{buildroot}" & head & "/")
 
 proc replaceTemplate(body, package, maintainer, version, arch, desc, install, files, license: string): string =
   result =
@@ -69,7 +69,7 @@ proc getInstallFiles(packageRoot: string): (seq[string], seq[string]) =
   for relPath in walkDirRec(packageRoot):
     let path = relPath[packageRoot.len..^1]
     installScript.add(path.generateInstallScript)
-    files.add(path)
+    files.add("%{buildroot}" & path)
   return (installScript, files)
 
 when isMainModule and not defined modeTest:
