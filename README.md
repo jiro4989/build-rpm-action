@@ -65,18 +65,21 @@ jobs:
       - name: create sample script
         run: |
           mkdir -p .rpmpkg/usr/bin
-          mkdir -p .rpmpkg/usr/lib/samplescript
-          echo -e "echo sample" > .rpmpkg/usr/bin/samplescript
-          chmod +x .rpmpkg/usr/bin/samplescript
-          echo -e "a=1" > .rpmpkg/usr/lib/samplescript/samplescript.conf
+          mkdir -p .rpmpkg/usr/lib/testbin
+          echo -e "echo hello" > .rpmpkg/usr/bin/testbin
+          echo -e "echo hello2" > .rpmpkg/usr/bin/testbin2
+          echo -e "a=1" > .rpmpkg/usr/lib/testbin/testbin.conf
+          chmod +x .rpmpkg/usr/bin/*
+
       - uses: jiro4989/build-rpm-action@v1
         with:
-          package: samplescript
+          summary: 'testbin is a test script'
+          package: testbin
           package_root: .rpmpkg
-          maintainer: your_name
-          version: ${{ steps.vars.outputs.tag }} # vX.X.X
-          arch: 'amd64'
-          desc: 'this is sample package.'
+          maintainer: jiro4989
+          version: 'v1.0.0'
+          arch: 'x86_64'
+          desc: 'test package'
 ```
 
 ## Development
