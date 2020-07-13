@@ -1,12 +1,12 @@
-name: 'build-deb-action'
-description: 'Build debian package.'
+name: 'build-rpm-action'
+description: 'Build rpm package.'
 author: 'jiro4989'
 inputs:
   summary:
     description: 'Package summary.'
     required: true
   package:
-    description: 'Package name of debian package.'
+    description: 'Package name of rpm package.'
     required: true
   package_root:
     description: 'Directory of release files.'
