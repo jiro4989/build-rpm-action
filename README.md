@@ -13,8 +13,11 @@
 
 ```yaml
 inputs:
+  summary:
+    description: 'Package summary.'
+    required: true
   package:
-    description: 'Package name of rpm package.'
+    description: 'Package name of debian package.'
     required: true
   package_root:
     description: 'Directory of release files.'
@@ -22,15 +25,21 @@ inputs:
   maintainer:
     description: 'Package maintainer name.'
     required: true
+  vendor:
+    description: 'Package vendor.'
+    default: ''
   version:
     description: 'Package version.'
     required: true
   arch:
     description: 'Package architecture.'
-    default: 'amd64'
+    default: 'x86_64'
   desc:
     description: 'Package description.'
     default: ''
+  license:
+    description: 'Package LICENSE.'
+ 
 ```
 
 ## Usage
