@@ -77,7 +77,7 @@ jobs:
           package: testbin
           package_root: .rpmpkg
           maintainer: jiro4989
-          version: 'v1.0.0'
+          version: '${{ steps.vars.outputs.tag }}' # vX.X.X
           arch: 'x86_64'
           desc: 'test package'
 ```
