@@ -7,14 +7,14 @@
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/jiro4989/build-rpm-action?logo=github&sort=semver)](https://github.com/jiro4989/build-rpm-action/releases)
 [![action-bumpr supported](https://img.shields.io/badge/bumpr-supported-ff69b4?logo=github&link=https://github.com/haya14busa/action-bumpr)](https://github.com/haya14busa/action-bumpr)
 
-`build-rpm-action` builds a simple debian package.
+`build-rpm-action` builds a simple rpm package.
 
 ## Input
 
 ```yaml
 inputs:
   package:
-    description: 'Package name of debian package.'
+    description: 'Package name of rpm package.'
     required: true
   package_root:
     description: 'Directory of release files.'
