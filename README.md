@@ -82,6 +82,10 @@ jobs:
           desc: 'test package'
 ```
 
+## Example projects
+
+* https://github.com/jiro4989/nimjson
+
 ## Development
 
 ### Release
