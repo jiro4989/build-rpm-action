@@ -14,6 +14,6 @@ RUN cd /tools && \
     nimble build -Y && \
     cp -p bin/* /
 
-COPY template.spec .
+COPY template.spec /
 COPY entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["entrypoint.sh"]

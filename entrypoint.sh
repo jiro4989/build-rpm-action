@@ -3,7 +3,7 @@
 set -eux
 
 /replacetool \
-  --specfile:template.spec \
+  --specfile:/template.spec \
   --summary:"$INPUT_SUMMARY" \
   --package-root:"$INPUT_PACKAGE_ROOT" \
   --package:"$INPUT_PACKAGE" \
@@ -20,7 +20,7 @@ readonly RPMBUILD_SPEC_DIR="$RPMBUILD_DIR/SPECS"
 (
   readonly WORKDIR="/tmp/work"
   mkdir "$WORKDIR"
-  cp template.spec "$WORKDIR"
+  cp /template.spec "$WORKDIR"
   cp -rp "$INPUT_PACKAGE_ROOT" "$WORKDIR/$INPUT_PACKAGE"
   cd "$WORKDIR"
   tar czf tmp.tar.gz "$INPUT_PACKAGE/"
