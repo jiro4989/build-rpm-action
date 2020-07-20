@@ -60,10 +60,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set tag
-        id: vars
-        run: echo ::set-output name=tag::${GITHUB_REF:10}
-
       - name: create sample script
         run: |
           mkdir -p .rpmpkg/usr/bin
@@ -79,7 +75,7 @@ jobs:
           package: testbin
           package_root: .rpmpkg
           maintainer: jiro4989
-          version: '${{ steps.vars.outputs.tag }}' # vX.X.X
+          version: ${{ github.ref }} # refs/tags/v*.*.*
           arch: 'x86_64'
           desc: 'test package'
 ```
