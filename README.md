@@ -73,7 +73,7 @@ jobs:
           echo -e "a=1" > .rpmpkg/usr/lib/testbin/testbin.conf
           chmod +x .rpmpkg/usr/bin/*
 
-      - uses: jiro4989/build-rpm-action@v1
+      - uses: jiro4989/build-rpm-action@v2
         with:
           summary: 'testbin is a test script'
           package: testbin
