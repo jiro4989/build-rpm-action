@@ -2,7 +2,8 @@ import os, strutils, parseopt
 
 type
   Options = object
-    specFile, summary, package, packageRoot, maintainer, version, arch, desc, license, vendor: string
+    specFile, summary, package, packageRoot, maintainer, version, arch, desc,
+        license, vendor, post: string
 
 proc getCmdOpts(params: seq[string]): Options =
   var optParser = initOptParser(params)
@@ -32,6 +33,8 @@ proc getCmdOpts(params: seq[string]): Options =
         result.desc = val
       of "license":
         result.license = val
+      of "post":
+        result.post = val
     of cmdEnd:
       assert false # cannot happen
     else:
@@ -42,7 +45,8 @@ proc generateInstallScript(path: string): seq[string] =
   result.add("mkdir -p %{buildroot}" & head)
   result.add("cp -p " & path[1..^1] & " %{buildroot}" & head & "/")
 
-proc replaceTemplate(body, summary, package, maintainer, version, arch, desc, install, files, license, vendor: string): string =
+proc replaceTemplate(body, summary, package, maintainer, version, arch, desc,
+    install, files, license, vendor, post: string): string =
   result =
     body
       .replace("{{SUMMARY}}", summary)
@@ -55,17 +59,20 @@ proc replaceTemplate(body, summary, package, maintainer, version, arch, desc, in
       .replace("{{INSTALL}}", install)
       .replace("{{FILES}}", files)
       .replace("{{LICENSE}}", license)
+      .replace("{{POST}}", post)
 
 proc formatDescription(desc: string): string =
   "Description: " & desc
 
-proc fixFile(file, summary, package, maintainer, version, arch, desc, install, files, license, vendor: string) =
+proc fixFile(file, summary, package, maintainer, version, arch, desc, install,
+    files, license, vendor, post: string) =
   let
     body = readFile(file)
-    fixedBody = replaceTemplate(body, summary=summary, package=package, maintainer=maintainer,
-                                version=version, arch=arch, desc=desc,
-                               install=install, files=files, license=license,
-                               vendor=vendor)
+    fixedBody = replaceTemplate(body, summary = summary, package = package, maintainer = maintainer,
+                                version = version, arch = arch, desc = desc,
+                               install = install, files = files,
+                                license = license,
+                               vendor = vendor, post = post)
   writeFile(file, fixedBody)
 
 proc getInstallFiles(packageRoot: string): (seq[string], seq[string]) =
@@ -94,17 +101,19 @@ when isMainModule and not defined modeTest:
     arch = params.arch
     desc = params.desc.formatDescription
     license = params.license
+    post = params.post
 
   let (installScript, files) = getInstallFiles(packageRoot)
   fixFile(params.specfile,
-          summary=summary,
-          package=package,
-          maintainer=maintainer,
-          version=version,
-          arch=arch,
-          desc=desc,
-          install=installScript.join("\n"),
-          files=files.join("\n"),
-          license=license,
-          vendor=vendor,
-         )
+          summary = summary,
+          package = package,
+          maintainer = maintainer,
+          version = version,
+          arch = arch,
+          desc = desc,
+          install = installScript.join("\n"),
+          files = files.join("\n"),
+          license = license,
+          vendor = vendor,
+          post = post,
+    )

@@ -14,7 +14,8 @@ INPUT_VERSION="$(echo "$INPUT_VERSION" | sed -E "s,^refs/tags/,,")"
   --maintainer:"$INPUT_MAINTAINER" \
   --vendor:"$INPUT_VENDOR" \
   --description:"$INPUT_DESC" \
-  --license:"$INPUT_LICENSE"
+  --license:"$INPUT_LICENSE" \
+  --post:"$INPUT_POST"
 
 readonly RPMBUILD_DIR="$HOME/rpmbuild"
 readonly RPMBUILD_SOURCE_DIR="$RPMBUILD_DIR/SOURCES"

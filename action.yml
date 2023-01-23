@@ -29,6 +29,9 @@ inputs:
   license:
     description: 'Package LICENSE.'
     default: 'MIT'
+  post:
+    description: 'Package post.'
+    default: ''
 runs:
   using: 'docker'
   image: 'docker://jiro4989/build-rpm-action:2.1.0'
