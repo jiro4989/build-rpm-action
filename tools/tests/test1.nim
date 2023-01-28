@@ -33,6 +33,7 @@ rm -rf $RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT
 
 %post
+{{POST}}
 
 %postun
 
@@ -72,6 +73,7 @@ suite "replaceTemplate":
       files = "/usr/bin/test1\n/usr/bin/test2",
       license = "MIT",
       vendor = "author.org",
+      post = "echo 1;\necho 2"
       )
     const want = """Summary: package summary
 Name: test
@@ -106,6 +108,8 @@ cp -p test2 /usr/bin/
 rm -rf $RPM_BUILD_ROOT
 
 %post
+echo 1;
+echo 2
 
 %postun
 

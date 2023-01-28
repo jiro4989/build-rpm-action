@@ -29,9 +29,12 @@ inputs:
   license:
     description: 'Package LICENSE.'
     default: 'MIT'
+  post:
+    description: 'Package post.'
+    default: ''
 runs:
   using: 'docker'
-  image: 'docker://jiro4989/build-rpm-action:2.1.0'
+  image: 'docker://jiro4989/build-rpm-action:2.2.0'
 
 # Ref: https://haya14busa.github.io/github-action-brandings/
 # TODO: update branding if you want.
