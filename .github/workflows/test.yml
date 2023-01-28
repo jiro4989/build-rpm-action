@@ -55,5 +55,6 @@ jobs:
           version: 'refs/tags/v1.0.0'
           arch: 'x86_64'
           desc: 'test package'
+          post: 'echo post1'
       - run: |
           docker run --rm -v $PWD:/work -t centos:7 bash -c 'rpm -Uvh /work/*.rpm && testbin'
