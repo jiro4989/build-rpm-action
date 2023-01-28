@@ -41,6 +41,9 @@ inputs:
     default: ''
   license:
     description: 'Package LICENSE.'
+  post:
+    description: 'Package post.'
+    default: ''
  
 ```
 
@@ -125,4 +128,3 @@ Supported linters:
 * [reviewdog/action-shellcheck](https://github.com/reviewdog/action-shellcheck)
 * [reviewdog/action-hadolint](https://github.com/reviewdog/action-hadolint)
 * [reviewdog/action-misspell](https://github.com/reviewdog/action-misspell)
-
