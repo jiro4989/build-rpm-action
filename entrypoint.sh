@@ -4,6 +4,11 @@ set -eux
 
 INPUT_VERSION="$(echo "$INPUT_VERSION" | sed -E "s,^refs/tags/,,")"
 
+OPTS=""
+if [ ! "$INPUT_VENDOR" = "" ]; then
+  OPTS="--vendor:$INPUT_VENDOR"
+fi
+
 /replacetool \
   --specfile:/template.spec \
   --summary:"$INPUT_SUMMARY" \
@@ -12,10 +17,10 @@ INPUT_VERSION="$(echo "$INPUT_VERSION" | sed -E "s,^refs/tags/,,")"
   --version:"$INPUT_VERSION" \
   --arch:"$INPUT_ARCH" \
   --maintainer:"$INPUT_MAINTAINER" \
-  --vendor:"$INPUT_VENDOR" \
   --description:"$INPUT_DESC" \
   --license:"$INPUT_LICENSE" \
-  --post:"$INPUT_POST"
+  --post:"$INPUT_POST" \
+  "$OPTS"
 
 readonly RPMBUILD_DIR="$HOME/rpmbuild"
 readonly RPMBUILD_SOURCE_DIR="$RPMBUILD_DIR/SOURCES"
