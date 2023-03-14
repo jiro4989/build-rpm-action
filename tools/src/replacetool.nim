@@ -62,7 +62,7 @@ proc replaceTemplate(body, summary, package, maintainer, version, arch, desc,
       .replace("{{POST}}", post)
 
 proc formatDescription(desc: string): string =
-  "Description: " & desc
+  desc
 
 proc fixFile(file, summary, package, maintainer, version, arch, desc, install,
     files, license, vendor, post: string) =
