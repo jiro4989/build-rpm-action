@@ -73,6 +73,7 @@ proc fixFile(file, summary, package, maintainer, version, arch, desc, install,
                                install = install, files = files,
                                 license = license,
                                vendor = vendor, post = post)
+    echo fixedBody
   writeFile(file, fixedBody)
 
 proc getInstallFiles(packageRoot: string): (seq[string], seq[string]) =
