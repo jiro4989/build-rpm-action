@@ -12,7 +12,11 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 BuildArch: {{ARCH}}
 
 %description
-{{DESC}}
+The test tools.
+The test tools.
+The test tools.
+
+The test tools.
 
 %prep
 rm -rf $RPM_BUILD_ROOT
