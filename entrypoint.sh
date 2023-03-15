@@ -4,6 +4,10 @@ set -eux
 
 INPUT_VERSION="$(echo "$INPUT_VERSION" | sed -E "s,^refs/tags/,,")"
 
+if [ "$INPUT_VENDOR" = "" ]; then
+  INPUT_VENDOR="$INPUT_MAINTAINER"
+fi
+
 /replacetool \
   --specfile:/template.spec \
   --summary:"$INPUT_SUMMARY" \
@@ -33,6 +37,7 @@ readonly RPMBUILD_SPEC_DIR="$RPMBUILD_DIR/SPECS"
   mv tmp.tar.gz "$RPMBUILD_SOURCE_DIR"
 
   cp -p template.spec "$RPMBUILD_SPEC_DIR"
+  cat template.spec
   rpmbuild -bb "$RPMBUILD_SPEC_DIR/template.spec"
 )
 
