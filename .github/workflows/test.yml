@@ -6,7 +6,7 @@ jobs:
   test-tools:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: jiro4989/setup-nim-action@v1
       - run: |
           cd tools
@@ -15,7 +15,7 @@ jobs:
   test-script:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: |
           mkdir -p .rpmpkg/usr/bin
           mkdir -p .rpmpkg/usr/lib/testbin
@@ -42,7 +42,7 @@ jobs:
   test-script-version:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: |
           mkdir -p .rpmpkg/usr/bin
           mkdir -p .rpmpkg/usr/lib/testbin
@@ -65,7 +65,7 @@ jobs:
   test-github-refs-version:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: |
           mkdir -p .rpmpkg/usr/bin
           mkdir -p .rpmpkg/usr/lib/testbin
