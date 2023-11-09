@@ -45,6 +45,9 @@ cp -p "$RPMBUILD_DIR/RPMS/$(uname -m)"/*.rpm .
 
 ls -lah ./*.rpm
 
+# for grep
+set +e
+
 for f in *.rpm; do
   # exclude debuginfo file
   line_count="$(echo "$f" | grep -Eoc "^${INPUT_PACKAGE}-debuginfo-")"
@@ -54,6 +57,8 @@ for f in *.rpm; do
   fi
   RPM_FILE="$f"
 done
+
+set -e
 
 echo "file_name=$RPM_FILE" >> "${GITHUB_OUTPUT}"
 echo "debuginfo_file_name=$RPM_DEBUGINFO_FILE" >> "${GITHUB_OUTPUT}"
