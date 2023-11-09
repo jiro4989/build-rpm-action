@@ -36,8 +36,13 @@ jobs:
             This is sample package.
 
             This is sample package.
+        id: build
       - run: |
           docker run --rm -v $PWD:/work -t centos:7 bash -c 'rpm -Uvh /work/*.rpm && testbin'
+      - name: Test file_name
+        run: test ${{ steps.build.outputs.file_name }} = 'testbin-1.0.0-1.el7.x86_64.rpm'
+      - name: Test debuginfo_file_name
+        run: test ${{ steps.build.outputs.debuginfo_file_name }} = 'testbin-debuginfo-1.0.0-1.el7.x86_64.rpm'
 
   test-script-version:
     runs-on: ubuntu-latest
