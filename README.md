@@ -47,6 +47,16 @@ inputs:
  
 ```
 
+## Output
+
+```yaml
+outputs:
+  file_name:
+    description: 'File name of resulting .rpm file. This does not contain a debuginfo file.'
+  debuginfo_file_name:
+    description: 'File name of resulting .rpm debuginfo file.'
+```
+
 ## Usage
 
 ```yaml
