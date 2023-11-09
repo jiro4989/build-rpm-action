@@ -32,6 +32,11 @@ inputs:
   post:
     description: 'Package post.'
     default: ''
+outputs:
+  file_name:
+    description: 'File name of resulting .rpm file. This does not contain a debuginfo file.'
+  debuginfo_file_name:
+    description: 'File name of resulting .rpm debuginfo file.'
 runs:
   using: 'docker'
   image: 'docker://jiro4989/build-rpm-action:2.3.0'

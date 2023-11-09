@@ -44,3 +44,16 @@ readonly RPMBUILD_SPEC_DIR="$RPMBUILD_DIR/SPECS"
 cp -p "$RPMBUILD_DIR/RPMS/$(uname -m)"/*.rpm .
 
 ls -lah ./*.rpm
+
+for f in *.rpm; do
+  # exclude debuginfo file
+  line_count="$(echo "$f" | grep -Eoc "^${INPUT_PACKAGE}-debuginfo-")"
+  if [ "$line_count" -ne 0 ]; then
+    RPM_DEBUGINFO_FILE="$f"
+    continue
+  fi
+  RPM_FILE="$f"
+done
+
+echo "file_name=$RPM_FILE" >> "${GITHUB_OUTPUT}"
+echo "debuginfo_file_name=$RPM_DEBUGINFO_FILE" >> "${GITHUB_OUTPUT}"
