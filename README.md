@@ -44,7 +44,14 @@ inputs:
   post:
     description: 'Package post.'
     default: ''
- 
+  build_requires:
+    description: 'Package build requires.'
+    # NOTE: for nim parseops package bugs
+    default: '-'
+  requires:
+    description: 'Package requires.'
+    # NOTE: for nim parseops package bugs
+    default: '-'
 ```
 
 ## Output
