@@ -10,6 +10,8 @@ fi
 
 /replacetool \
   --specfile:/template.spec \
+  --build-requires:"$INPUT_BUILD_REQUIRES" \
+  --requires:"$INPUT_REQUIRES" \
   --summary:"$INPUT_SUMMARY" \
   --package-root:"$INPUT_PACKAGE_ROOT" \
   --package:"$INPUT_PACKAGE" \

@@ -88,5 +88,7 @@ jobs:
           arch: 'x86_64'
           desc: 'test package'
           post: 'echo post1'
+          # build_requires: 'perl-Git = 2.43.0'
+          # requires: 'git-core = 2.43.0'
       - run: |
           docker run --rm -v $PWD:/work -t centos:7 bash -c 'rpm -Uvh /work/*.rpm && testbin'

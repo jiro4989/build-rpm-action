@@ -10,6 +10,8 @@ Vendor: {{VENDOR}}
 Source: tmp.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 BuildArch: {{ARCH}}
+{{BUILD_REQUIRES}}
+{{REQUIRES}}
 
 %description
 {{DESC}}

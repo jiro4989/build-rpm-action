@@ -3,7 +3,7 @@ import os, strutils, parseopt
 type
   Options = object
     specFile, summary, package, packageRoot, maintainer, version, arch, desc,
-        license, vendor, post: string
+        license, vendor, post, buildRequires, requires: string
 
 proc getCmdOpts(params: seq[string]): Options =
   var optParser = initOptParser(params)
@@ -35,6 +35,10 @@ proc getCmdOpts(params: seq[string]): Options =
         result.license = val
       of "post":
         result.post = val
+      of "build-requires":
+        result.buildRequires = val
+      of "requires":
+        result.requires = val
     of cmdEnd:
       assert false # cannot happen
     else:
@@ -46,7 +50,7 @@ proc generateInstallScript(path: string): seq[string] =
   result.add("cp -p " & path[1..^1] & " %{buildroot}" & head & "/")
 
 proc replaceTemplate(body, summary, package, maintainer, version, arch, desc,
-    install, files, license, vendor, post: string): string =
+    install, files, license, vendor, post, buildRequires, requires: string): string =
   result =
     body
       .replace("{{SUMMARY}}", summary)
@@ -60,19 +64,22 @@ proc replaceTemplate(body, summary, package, maintainer, version, arch, desc,
       .replace("{{FILES}}", files)
       .replace("{{LICENSE}}", license)
       .replace("{{POST}}", post)
+      .replace("{{BUILD_REQUIRES}}", buildRequires)
+      .replace("{{REQUIRES}}", requires)
 
 proc formatDescription(desc: string): string =
   "Description: " & desc
 
 proc fixFile(file, summary, package, maintainer, version, arch, desc, install,
-    files, license, vendor, post: string) =
+    files, license, vendor, post, buildRequires, requires: string) =
   let
     body = readFile(file)
     fixedBody = replaceTemplate(body, summary = summary, package = package, maintainer = maintainer,
                                 version = version, arch = arch, desc = desc,
                                install = install, files = files,
                                 license = license,
-                               vendor = vendor, post = post)
+                               vendor = vendor, post = post,
+                               buildRequires = buildRequires, requires = requires)
   writeFile(file, fixedBody)
 
 proc getInstallFiles(packageRoot: string): (seq[string], seq[string]) =
@@ -103,6 +110,14 @@ when isMainModule and not defined modeTest:
     license = params.license
     post = params.post
 
+    # NOTE: for bugs std/parseopt
+    buildRequires =
+      if params.buildRequires == "-": ""
+      else: "BuildRequires: " & params.buildRequires
+    requires =
+      if params.requires == "-": ""
+      else: "Requires: " & params.requires
+
   let (installScript, files) = getInstallFiles(packageRoot)
   fixFile(params.specfile,
           summary = summary,
@@ -116,4 +131,6 @@ when isMainModule and not defined modeTest:
           license = license,
           vendor = vendor,
           post = post,
+          buildRequires = buildRequires,
+          requires = requires,
     )
